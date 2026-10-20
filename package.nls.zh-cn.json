@@ -1,5 +1,5 @@
 {
-  "displayName": "工人与资源 Mod 制作工具",
+  "displayName": "工人与资源：苏维埃共和国 Mod 制作工具",
   "description": "《工人与资源：苏维埃共和国》Mod 制作工具箱。",
   "config.general.title": "工人与资源 · 通用",
   "config.detect.enable.desc": "打开文件时按**路径与内容**自动判断类型。\n\n这个游戏的文件没有独占后缀——脚本是 `.txt`、配置是 `.ini`，而且同名文件语义还不一样（`script.ini` 这类文件名到处都是，有的是场景清单，有的是地形参数）。所以类型判定只能这样做。\n\n关掉后需要手动切换语言模式（`Ctrl+Shift+P` → 更改语言模式）。",

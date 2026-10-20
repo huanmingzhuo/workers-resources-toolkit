@@ -1,5 +1,5 @@
 {
-  "displayName": "Workers & Resources Mod Toolkit",
+  "displayName": "Workers & Resources: Soviet Republic Mod Toolkit",
   "description": "Modding toolkit for Workers & Resources: Soviet Republic.",
   "config.general.title": "Workers & Resources · General",
   "config.detect.enable.desc": "Detect the file type by **path and content** when a file is opened.\n\nFiles in this game have no exclusive extension — scripts are `.txt`, configs are `.ini`, and the same name can mean different things (`script.ini` is everywhere; some are scenario lists, some are terrain parameters). So type detection has to work this way.\n\nTurn it off and you have to switch the language mode by hand (`Ctrl+Shift+P` → Change Language Mode).",
