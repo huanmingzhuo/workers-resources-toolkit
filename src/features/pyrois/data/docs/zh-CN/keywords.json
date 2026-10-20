@@ -1,0 +1,71 @@
+{
+  "_note": "语言关键字的悬停 / 补全说明。键必须落在 data/keywords.json 的词表里（control / declarations / types / misc），多写或拼错会导致说明显示不出来。sig = 签名，d = 一句说明。",
+  "include": {
+    "sig": "include(\"文件名\")",
+    "d": "引入另一个脚本文件。"
+  },
+  "main": {
+    "sig": "defineFunction(main, void)",
+    "d": "脚本入口函数，游戏运行脚本时从这里开始"
+  },
+  "defineFunction": {
+    "sig": "defineFunction(名字, 返回类型, 类型:参数名, ...)",
+    "d": "定义函数。"
+  },
+  "defineVariable": {
+    "sig": "defineVariable(类型, 变量名)",
+    "d": "定义全局变量，类型可以是内置类型或结构体"
+  },
+  "defineArray": {
+    "sig": "defineArray(类型[长度], 数组名)",
+    "d": "定义全局数组"
+  },
+  "defineInstruction": {
+    "sig": "defineInstruction(指令名, 操作码, 参数类型, ...)",
+    "d": "声明一条虚拟机指令"
+  },
+  "defineStruct": {
+    "sig": "defineStruct(结构体名, 编号)",
+    "d": "定义结构体类型，体内用 defineStructVariable 加字段、defineStructInstruction 加方法"
+  },
+  "defineStructVariable": {
+    "sig": "defineStructVariable(结构体, 类型, 字段名)",
+    "d": "给结构体加一个字段"
+  },
+  "defineStructArray": {
+    "sig": "defineStructArray(结构体, 类型[长度], 字段名)",
+    "d": "给结构体加一个数组字段"
+  },
+  "defineStructInstruction": {
+    "sig": "defineStructInstruction(结构体, 方法名, 操作码, 参数类型, ...)",
+    "d": "给结构体加一个方法"
+  },
+  "if": {
+    "sig": "if (条件) { ... }",
+    "d": "条件分支。条件里 ? 是相等、! 是非，& 和 | 是逻辑运算且不短路"
+  },
+  "elseif": {
+    "sig": "elseif (条件) { ... }",
+    "d": "只有 elseif，没有 else if 这种写法，可以连写多个"
+  },
+  "else": {
+    "sig": "else { ... }",
+    "d": "和 if 搭配使用，否则"
+  },
+  "for": {
+    "sig": "for (初始化, 条件, 步进) { ... }",
+    "d": "用逗号分隔：for (i=0, i<n, i=i+1)。不能用分号"
+  },
+  "while": {
+    "sig": "while (条件) { ... }",
+    "d": "条件为真时反复执行。"
+  },
+  "return": {
+    "sig": "return(表达式)",
+    "d": "结束当前函数，返回表达式值"
+  },
+  "returnVoid": {
+    "sig": "returnVoid()",
+    "d": "返回类型为 void 的函数用它结束"
+  }
+}

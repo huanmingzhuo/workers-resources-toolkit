@@ -1,0 +1,50 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "BTF",
+  "scopeName": "source.btf",
+  "fileTypes": [".btfview"],
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#columns" },
+    { "include": "#entry" }
+  ],
+  "repository": {
+
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.semicolon.btf",
+          "begin": "^;",
+          "end": "$",
+          "patterns": [
+            { "name": "invalid.illegal.btf", "match": "\\[错误\\]" },
+            { "name": "invalid.deprecated.btf", "match": "\\[警告\\]" },
+            { "name": "constant.numeric.btf", "match": "\\b\\d+\\b" }
+          ]
+        }
+      ]
+    },
+
+    "columns": {
+      "match": "^(index|序号)\\s+(id)\\s+(charOffset|字符偏移)\\s+(length|长度)\\s+(text|文本)$",
+      "captures": {
+        "1": { "name": "entity.name.section.btf" },
+        "2": { "name": "entity.name.section.btf" },
+        "3": { "name": "entity.name.section.btf" },
+        "4": { "name": "entity.name.section.btf" },
+        "5": { "name": "entity.name.section.btf" }
+      }
+    },
+
+    "entry": {
+      "match": "^(\\d+)\\s+(-?\\d+)\\s+(-?\\d+)\\s+(-?\\d+)\\s+(.*)$",
+      "captures": {
+        "1": { "name": "constant.numeric.index.btf" },
+        "2": { "name": "constant.numeric.id.btf" },
+        "3": { "name": "constant.numeric.offset.btf" },
+        "4": { "name": "constant.numeric.length.btf" },
+        "5": { "name": "string.unquoted.text.btf" }
+      }
+    }
+  }
+}

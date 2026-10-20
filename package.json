@@ -1,0 +1,253 @@
+{
+  "name": "workers-resources-toolkit",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "0.1.0",
+  "publisher": "huanmingzhuo",
+  "author": "huanmingzhuo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huanmingzhuo/workers-resources-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/huanmingzhuo/workers-resources-toolkit/issues"
+  },
+  "homepage": "https://github.com/huanmingzhuo/workers-resources-toolkit#readme",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "pyrois",
+    "wrsr",
+    "workers and resources",
+    "soviet republic",
+    "modding",
+    "mod",
+    "toolkit",
+    "script",
+    "scenario",
+    "btf",
+    "translation",
+    "语法高亮",
+    "mod制作"
+  ],
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1f3b64",
+    "theme": "dark"
+  },
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "pyrois",
+        "aliases": [
+          "%language.pyrois.alias%"
+        ],
+        "extensions": [
+          ".pyrois",
+          ".pyroisscript"
+        ],
+        "filenamePatterns": [
+          "*.pyrois.txt",
+          "*_script.txt",
+          "*Script.txt",
+          "SOVIETInstructions.txt"
+        ],
+        "configuration": "./src/features/pyrois/language-configuration.json"
+      },
+      {
+        "id": "btf",
+        "aliases": [
+          "%language.btf.alias%"
+        ],
+        "extensions": [
+          ".btfview"
+        ],
+        "configuration": "./src/features/btf/language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "pyrois",
+        "scopeName": "source.pyrois",
+        "path": "./src/features/pyrois/pyrois.tmLanguage.json"
+      },
+      {
+        "language": "btf",
+        "scopeName": "source.btf",
+        "path": "./src/features/btf/btf.tmLanguage.json"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "wrsr.btf.viewer",
+        "displayName": "%customEditor.btf.viewer.displayName%",
+        "selector": [
+          {
+            "filenamePattern": "*.btf"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "wrsr.btf.save",
+        "key": "ctrl+s",
+        "mac": "cmd+s",
+        "when": "activeCustomEditorId == 'wrsr.btf.viewer'"
+      }
+    ],
+    "commands": [
+      {
+        "command": "wrsr.btf.openView",
+        "title": "%command.btf.openView.title%",
+        "category": "WRSR"
+      },
+      {
+        "command": "wrsr.btf.save",
+        "title": "%command.btf.save.title%",
+        "category": "WRSR"
+      },
+      {
+        "command": "wrsr.btf.exportJson",
+        "title": "%command.btf.exportJson.title%",
+        "category": "WRSR"
+      },
+      {
+        "command": "wrsr.btf.exportCsv",
+        "title": "%command.btf.exportCsv.title%",
+        "category": "WRSR"
+      },
+      {
+        "command": "wrsr.btf.build",
+        "title": "%command.btf.build.title%",
+        "category": "WRSR"
+      },
+      {
+        "command": "wrsr.translate.open",
+        "title": "%command.translate.open.title%",
+        "category": "WRSR"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "wrsr.btf.save",
+          "when": "false"
+        },
+        {
+          "command": "wrsr.translate.open",
+          "when": "wrsr.devRepo"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "wrsr.btf.openView",
+          "when": "resourceExtname == .btf",
+          "group": "navigation@1"
+        },
+        {
+          "command": "wrsr.btf.exportJson",
+          "when": "resourceExtname == .btf",
+          "group": "wrsr@1"
+        },
+        {
+          "command": "wrsr.btf.exportCsv",
+          "when": "resourceExtname == .btf",
+          "group": "wrsr@2"
+        },
+        {
+          "command": "wrsr.btf.build",
+          "when": "resourceExtname == .json",
+          "group": "wrsr@3"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "wrsr.btf.exportJson",
+          "when": "resourceLangId == btf || resourceExtname == .btf",
+          "group": "wrsr@1"
+        },
+        {
+          "command": "wrsr.btf.exportCsv",
+          "when": "resourceLangId == btf || resourceExtname == .btf",
+          "group": "wrsr@2"
+        },
+        {
+          "command": "wrsr.btf.build",
+          "when": "resourceExtname == .json",
+          "group": "wrsr@3"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "%config.general.title%",
+        "properties": {
+          "wrsr.detect.enable": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%config.detect.enable.desc%"
+          },
+          "wrsr.language": {
+            "type": "string",
+            "default": "auto",
+            "markdownDescription": "%config.language.desc%"
+          }
+        }
+      },
+      {
+        "title": "%config.pyrois.title%",
+        "properties": {
+          "wrsr.pyrois.completion.enable": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%config.pyrois.completion.enable.desc%"
+          },
+          "wrsr.pyrois.hover.enable": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%config.pyrois.hover.enable.desc%"
+          },
+          "wrsr.pyrois.outline.enable": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%config.pyrois.outline.enable.desc%"
+          },
+          "wrsr.pyrois.definition.enable": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "%config.pyrois.definition.enable.desc%"
+          }
+        }
+      },
+      {
+        "title": "%config.btf.title%",
+        "properties": {
+          "wrsr.btf.view.maxEntries": {
+            "type": "number",
+            "default": 20000,
+            "markdownDescription": "%config.btf.view.maxEntries.desc%"
+          }
+        }
+      }
+    ]
+  }
+}

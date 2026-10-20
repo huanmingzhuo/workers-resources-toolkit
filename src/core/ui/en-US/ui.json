@@ -1,0 +1,4 @@
+{
+  "_note": "UI strings for the core (not owned by any feature module). Key names are fixed; missing entries fall back to the default language. {0} is a placeholder.",
+  "detect.autoSwitched": "WRSR: auto-detected as \"{0}\" (can be turned off in settings)"
+}

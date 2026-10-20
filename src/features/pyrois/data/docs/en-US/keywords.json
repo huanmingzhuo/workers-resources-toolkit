@@ -1,0 +1,71 @@
+{
+  "_note": "Tooltip and completion docs for language keywords. Keys must exist in data/keywords.json (control / declarations / types / misc); a misspelled key will never show up. sig = signature, d = one-line description.",
+  "include": {
+    "sig": "include(\"filename\")",
+    "d": "Includes another script file."
+  },
+  "main": {
+    "sig": "defineFunction(main, void)",
+    "d": "Script entry point; the game starts running the script here."
+  },
+  "defineFunction": {
+    "sig": "defineFunction(name, returnType, type:paramName, ...)",
+    "d": "Defines a function."
+  },
+  "defineVariable": {
+    "sig": "defineVariable(type, name)",
+    "d": "Defines a global variable. The type can be a built-in type or a struct."
+  },
+  "defineArray": {
+    "sig": "defineArray(type[length], name)",
+    "d": "Defines a global array."
+  },
+  "defineInstruction": {
+    "sig": "defineInstruction(name, opcode, paramType, ...)",
+    "d": "Declares a VM instruction."
+  },
+  "defineStruct": {
+    "sig": "defineStruct(name, id)",
+    "d": "Defines a struct type; add fields with defineStructVariable and methods with defineStructInstruction."
+  },
+  "defineStructVariable": {
+    "sig": "defineStructVariable(struct, type, fieldName)",
+    "d": "Adds a field to a struct."
+  },
+  "defineStructArray": {
+    "sig": "defineStructArray(struct, type[length], fieldName)",
+    "d": "Adds an array field to a struct."
+  },
+  "defineStructInstruction": {
+    "sig": "defineStructInstruction(struct, methodName, opcode, paramType, ...)",
+    "d": "Adds a method to a struct."
+  },
+  "if": {
+    "sig": "if (condition) { ... }",
+    "d": "Conditional branch. In a condition, ? means equal, ! means not, and & and | are logical operators that do not short-circuit."
+  },
+  "elseif": {
+    "sig": "elseif (condition) { ... }",
+    "d": "Only elseif exists, not else if. You can chain several."
+  },
+  "else": {
+    "sig": "else { ... }",
+    "d": "Used together with if, meaning otherwise."
+  },
+  "for": {
+    "sig": "for (init, condition, step) { ... }",
+    "d": "Comma-separated: for (i=0, i<n, i=i+1). Semicolons cannot be used."
+  },
+  "while": {
+    "sig": "while (condition) { ... }",
+    "d": "Repeats while the condition is true."
+  },
+  "return": {
+    "sig": "return(expression)",
+    "d": "Ends the current function and returns the value of the expression."
+  },
+  "returnVoid": {
+    "sig": "returnVoid()",
+    "d": "Ends a function whose return type is void."
+  }
+}

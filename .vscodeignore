@@ -1,0 +1,35 @@
+.vscode/**
+.vscode-test/**
+.tmp/**
+tools/**
+/docs/**
+notes/**
+reference/**
+CONTRIBUTING.md
+examples/**
+
+# 新功能模板，只供开发时复制
+src/features/_模板.js
+
+# 开发用文件
+.gitignore
+.gitattributes
+.git/**
+.github/**
+**/.DS_Store
+**/Thumbs.db
+**/*.vsix
+**/*.map
+**/*.ts
+node_modules/**
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+jsconfig.json
+tsconfig.json
+
+# 编辑器/系统垃圾
+**/*.code-workspace
+**/.history/**
+**/*.log
+**/*.local.*

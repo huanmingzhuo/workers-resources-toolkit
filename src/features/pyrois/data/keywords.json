@@ -1,0 +1,23 @@
+{
+  "_note": "Pyrois 语言的词表。这些词不在游戏 API 表里（api.json 只有指令/结构体/常量/函数），语义由语言本身定死，所以单独放这一张表。加一个关键字改这里；每个关键字在各语言下的说明在 data/docs/<语言>/keywords.json。",
+  "_source": "词表来自 SOVIET64.exe 关键字注册函数 sub_140017F50（VA 0x140017F50）里的字符串交叉引用：每个词只被这一处 LEA 引用一次，注册的正好是 8 个 define* + if/elseif/else/for/while + void/char/int/float/string + main。d",
+  "_control": "控制关键字。对应语法规则 keyword.control。判断表达式里：逻辑非写 !，相等写 ?（没有 == / !=），逻辑与、逻辑或是单个 & / |（没有 && / ||），且 & / | **不短路**",
+  "control": [
+    "if", "elseif", "else", "for", "while", "return", "returnVoid"
+  ],
+  "_declarations": "定义类关键字。对应语法规则 keyword.other.declaration",
+  "declarations": [
+    "defineFunction", "defineVariable", "defineArray", "defineInstruction",
+    "defineStruct", "defineStructVariable", "defineStructArray", "defineStructInstruction"
+  ],
+  "_types": "内置类型，只有这 5 个。对应语法规则 storage.type",
+  "types": [
+    "void", "char", "int", "float", "string"
+  ],
+  "_structTypes": "vec2/vec3/vec4/mat2x2/mat3x3/mat4x4 **不是关键字**，它们是 SOVIETInstructions.txt 里用 defineStruct 定义的结构体。这里单列，只是因为它们也出现在声明位置（如 defineVariable(vec3, v)），语法文件把它们一并当类型染色；补全时按结构体列出，不重复",
+  "structTypes": [
+    "vec2", "vec3", "vec4", "mat2x2", "mat3x3", "mat4x4"
+  ],
+  "_misc": "其余语言词：main 是脚本入口（defineFunction 里被特判的函数名，也是注册过的关键字），include 引入外部文件。语法里各自单独成规则",
+  "misc": ["main", "include"]
+}

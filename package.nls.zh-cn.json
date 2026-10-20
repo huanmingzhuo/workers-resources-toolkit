@@ -1,0 +1,23 @@
+{
+  "displayName": "工人与资源 Mod 制作工具",
+  "description": "《工人与资源：苏维埃共和国》Mod 制作工具箱。",
+  "config.general.title": "工人与资源 · 通用",
+  "config.detect.enable.desc": "打开文件时按**路径与内容**自动判断类型。\n\n这个游戏的文件没有独占后缀——脚本是 `.txt`、配置是 `.ini`，而且同名文件语义还不一样（`script.ini` 这类文件名到处都是，有的是场景清单，有的是地形参数）。所以类型判定只能这样做。\n\n关掉后需要手动切换语言模式（`Ctrl+Shift+P` → 更改语言模式）。",
+  "config.language.desc": "**悬停 / 补全 / 大纲里的说明与文字**用哪种语言。\n\n`auto`（默认）= 跟随 VS Code 的显示语言；也可以直接填语言目录名，例如 `zh-CN`、`en-US`。\n\n注意：**设置的标题与说明、命令名、插件名不归它管** —— 那些由 VS Code 的显示语言决定（宿主扫描插件清单时替换，插件运行时改不了）。\n\n某个符号在当前语言里没写说明时，会自动回退到默认语言 `zh-CN`；再没有就只显示签名。",
+  "config.pyrois.title": "工人与资源 · Pyrois 脚本",
+  "config.pyrois.completion.enable.desc": "启用指令 / 结构体 / 结构体字段 / 常量 / 函数的自动补全。",
+  "config.pyrois.hover.enable.desc": "悬停在指令、结构体、常量、函数、结构体字段，以及 `defineFunction` / `if` / `for` / `include` 这类语言关键字上时显示签名与说明。",
+  "config.pyrois.outline.enable.desc": "在「大纲 / 转到符号」中显示脚本里定义的函数与结构体。",
+  "config.pyrois.definition.enable.desc": "`Ctrl`+点击（或 `F12`）跳到定义。\n\n`include(\"文件\")` 以及 `Script_Exists` / `Script_StartNew` / `Script_DestroyByName` 的文件名参数会直接打开对应文件；本文件内的变量、函数、结构体会跳到声明处；指令、结构体字段与方法会顺着脚本开头的 `include(\"SOVIETInstructions.txt\")` 跳进游戏自带的 API 表。",
+  "config.btf.title": "工人与资源 · BTF 文件",
+  "config.btf.view.maxEntries.desc": "「BTF 文本视图」最多列出多少条翻译。\n\n文本视图就是一份普通文本，条目太多（几十万行）会拖慢编辑器。\n\n**对照视图（双击 `.btf` 打开的那个）不受这个设置影响** —— 它按需渲染，并且**导出 JSON / CSV 也从来不受限制**。\n\n填 `0` 或负数表示不限。",
+  "customEditor.btf.viewer.displayName": "BTF 视图",
+  "language.btf.alias": "BTF 视图",
+  "command.translate.open.title": "打开翻译工作台",
+  "language.pyrois.alias": "Pyrois 脚本",
+  "command.btf.openView.title": "打开 BTF 视图",
+  "command.btf.save.title": "保存 BTF 对照视图的改动（Ctrl+S）",
+  "command.btf.exportJson.title": "导出 BTF 为 JSON",
+  "command.btf.exportCsv.title": "导出 BTF 为 CSV",
+  "command.btf.build.title": "从 JSON 生成 BTF"
+}

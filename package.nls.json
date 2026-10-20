@@ -1,0 +1,23 @@
+{
+  "displayName": "Workers & Resources Mod Toolkit",
+  "description": "Modding toolkit for Workers & Resources: Soviet Republic.",
+  "config.general.title": "Workers & Resources · General",
+  "config.detect.enable.desc": "Detect the file type by **path and content** when a file is opened.\n\nFiles in this game have no exclusive extension — scripts are `.txt`, configs are `.ini`, and the same name can mean different things (`script.ini` is everywhere; some are scenario lists, some are terrain parameters). So type detection has to work this way.\n\nTurn it off and you have to switch the language mode by hand (`Ctrl+Shift+P` → Change Language Mode).",
+  "config.language.desc": "Which language the **hover / completion / outline text and descriptions** use.\n\n`auto` (default) = follow the VS Code display language. You can also put a language directory name, for example `zh-CN` or `en-US`.\n\nNote: this does **not** affect the settings titles/descriptions, command names or the extension name — those follow the VS Code display language (the host replaces them while scanning the extension manifest; an extension cannot change them at runtime).\n\nWhen a symbol has no description in the selected language it falls back to the default language `zh-CN`; if there is still none, only the signature is shown.",
+  "config.pyrois.title": "Workers & Resources · Pyrois script",
+  "config.pyrois.completion.enable.desc": "Enable completion for instructions / structs / struct fields / constants / functions.",
+  "config.pyrois.hover.enable.desc": "Show the signature and description when hovering instructions, structs, constants, functions, struct fields, and language keywords such as `defineFunction` / `if` / `for` / `include`.",
+  "config.pyrois.outline.enable.desc": "Show the functions and structs defined in the script in the Outline / Go to Symbol view.",
+  "config.pyrois.definition.enable.desc": "`Ctrl`+click (or `F12`) jumps to the definition.\n\nThe file-name argument of `include(\"file\")`, and of `Script_Exists` / `Script_StartNew` / `Script_DestroyByName`, opens that file directly; variables, functions and structs in the same file jump to their declaration; instructions, struct fields and methods follow the `include(\"SOVIETInstructions.txt\")` at the top of the script into the game's own API table.",
+  "config.btf.title": "Workers & Resources · BTF files",
+  "config.btf.view.maxEntries.desc": "How many translations the \"BTF text view\" lists at most.\n\nThe text view is an ordinary text document; too many entries (hundreds of thousands of lines) slow the editor down.\n\n**The review view (the one you get by double-clicking a `.btf`) is not affected** — it renders on demand, and **exporting JSON / CSV is never limited**.\n\n`0` or a negative number means no limit.",
+  "customEditor.btf.viewer.displayName": "BTF view",
+  "language.btf.alias": "BTF view",
+  "command.translate.open.title": "Open translation workbench",
+  "language.pyrois.alias": "Pyrois script",
+  "command.btf.openView.title": "Open BTF view",
+  "command.btf.save.title": "Save changes in the BTF review view (Ctrl+S)",
+  "command.btf.exportJson.title": "Export BTF as JSON",
+  "command.btf.exportCsv.title": "Export BTF as CSV",
+  "command.btf.build.title": "Build BTF from JSON"
+}

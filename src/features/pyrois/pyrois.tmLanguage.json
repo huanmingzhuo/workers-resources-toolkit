@@ -1,0 +1,304 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Pyrois",
+  "scopeName": "source.pyrois",
+  "fileTypes": [".pyrois", ".pyroisscript"],
+  "firstLineMatch": "^.*include\\s*\\(\\s*[\"']SOVIETInstructions",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#declaration-blocks" },
+    { "include": "#keywords" },
+    { "include": "#types" },
+    { "include": "#constants" },
+    { "include": "#member-access" },
+    { "include": "#function-call" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#punctuation" },
+    { "include": "#identifiers" }
+  ],
+  "repository": {
+
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.documentation.pyrois",
+          "match": "(///|//!)(.*)$",
+          "captures": {
+            "2": {
+              "patterns": [
+                { "name": "storage.type.class.doxygen", "match": "@[A-Za-z]\\w*" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "comment.line.double-slash.pyrois",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.documentation.pyrois",
+          "begin": "/\\*(\\*|!)",
+          "end": "\\*/",
+          "patterns": [
+            { "name": "storage.type.class.doxygen", "match": "@[A-Za-z]\\w*" }
+          ]
+        },
+        {
+          "name": "comment.block.pyrois",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.pyrois",
+          "begin": "\"",
+          "end": "\"|$"
+        },
+        {
+          "name": "string.quoted.single.pyrois",
+          "begin": "'",
+          "end": "'|$"
+        }
+      ]
+    },
+
+    "declaration-blocks": {
+      "patterns": [
+        { "include": "#decl-struct" },
+        { "include": "#decl-struct-member" },
+        { "include": "#decl-struct-method" },
+        { "include": "#decl-instruction" },
+        { "include": "#decl-function" },
+        { "include": "#decl-variable" }
+      ]
+    },
+
+    "decl-struct": {
+      "begin": "\\b(defineStruct)(\\s*)(\\()",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.declaration.pyrois" },
+        "3": { "name": "punctuation.section.parens.begin.pyrois" }
+      },
+      "end": "\\)|$",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.pyrois" }
+      },
+      "patterns": [
+        { "name": "entity.name.type.pyrois", "match": "[A-Za-z_][A-Za-z0-9_]*" },
+        { "name": "constant.numeric.integer.pyrois", "match": "\\b\\d+\\b" },
+        { "name": "punctuation.separator.comma.pyrois", "match": "," }
+      ]
+    },
+
+    "decl-struct-member": {
+      "begin": "\\b(defineStructVariable|defineStructArray)(\\s*)(\\()\\s*([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.declaration.struct.pyrois" },
+        "3": { "name": "punctuation.section.parens.begin.pyrois" },
+        "4": { "name": "support.class.pyrois" }
+      },
+      "end": "\\)|$",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.pyrois" }
+      },
+      "patterns": [
+        { "include": "#types" },
+        { "name": "variable.other.member.pyrois", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\))" },
+        { "name": "support.class.pyrois", "match": "[A-Za-z_][A-Za-z0-9_]*" },
+        { "name": "constant.numeric.integer.pyrois", "match": "\\b\\d+\\b" },
+        { "name": "punctuation.section.brackets.pyrois", "match": "[\\[\\]]" },
+        { "name": "punctuation.separator.comma.pyrois", "match": "," }
+      ]
+    },
+
+    "decl-struct-method": {
+      "begin": "\\b(defineStructInstruction)(\\s*)(\\()\\s*([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.declaration.struct.pyrois" },
+        "3": { "name": "punctuation.section.parens.begin.pyrois" },
+        "4": { "name": "support.class.pyrois" }
+      },
+      "end": "\\)|$",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.pyrois" }
+      },
+      "patterns": [
+        { "include": "#types" },
+        { "name": "entity.name.function.member.pyrois", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*,)" },
+        { "name": "constant.numeric.integer.pyrois", "match": "\\b\\d+\\b" },
+        { "name": "punctuation.separator.comma.pyrois", "match": "," }
+      ]
+    },
+
+    "decl-instruction": {
+      "begin": "\\b(defineInstruction)(\\s*)(\\()\\s*([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.declaration.pyrois" },
+        "3": { "name": "punctuation.section.parens.begin.pyrois" },
+        "4": { "name": "entity.name.function.instruction.pyrois" }
+      },
+      "end": "\\)|$",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.pyrois" }
+      },
+      "patterns": [
+        { "include": "#types" },
+        { "name": "constant.numeric.integer.pyrois", "match": "\\b\\d+\\b" },
+        { "name": "punctuation.separator.comma.pyrois", "match": "," }
+      ]
+    },
+
+    "decl-function": {
+      "begin": "\\b(defineFunction)(\\s*)(\\()\\s*([A-Za-z_][A-Za-z0-9_]*)",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.declaration.pyrois" },
+        "3": { "name": "punctuation.section.parens.begin.pyrois" },
+        "4": { "name": "entity.name.function.pyrois" }
+      },
+      "end": "\\)|$",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.pyrois" }
+      },
+      "patterns": [
+        { "include": "#types" },
+        { "name": "variable.parameter.pyrois", "match": "(?<=:)\\s*[A-Za-z_][A-Za-z0-9_]*" },
+        { "name": "support.class.pyrois", "match": "[A-Za-z_][A-Za-z0-9_]*" },
+        { "name": "punctuation.separator.comma.pyrois", "match": "," },
+        { "name": "punctuation.separator.colon.pyrois", "match": ":" }
+      ]
+    },
+
+    "decl-variable": {
+      "begin": "\\b(defineVariable|defineArray)(\\s*)(\\()",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.declaration.pyrois" },
+        "3": { "name": "punctuation.section.parens.begin.pyrois" }
+      },
+      "end": "\\)|$",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.pyrois" }
+      },
+      "patterns": [
+        { "include": "#types" },
+        { "name": "variable.other.definition.pyrois", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\))" },
+        { "name": "support.class.pyrois", "match": "[A-Za-z_][A-Za-z0-9_]*" },
+        { "name": "constant.numeric.integer.pyrois", "match": "\\b\\d+\\b" },
+        { "name": "punctuation.section.brackets.pyrois", "match": "[\\[\\]]" },
+        { "name": "punctuation.separator.comma.pyrois", "match": "," }
+      ]
+    },
+
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.pyrois",
+          "match": "\\b(if|elseif|else|for|while|return|returnVoid)\\b"
+        },
+        {
+          "name": "variable.language.pyrois",
+          "match": "\\bmain\\b"
+        },
+        {
+          "name": "keyword.other.declaration.pyrois",
+          "match": "\\b(defineStructInstruction|defineStructVariable|defineStructArray|defineStruct|defineInstruction|defineVariable|defineFunction|defineArray)\\b"
+        },
+        {
+          "name": "keyword.control.import.pyrois",
+          "match": "\\binclude\\b"
+        }
+      ]
+    },
+
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.pyrois",
+          "match": "\\b(void|char|int|float|string|vec2|vec3|vec4|mat2x2|mat3x3|mat4x4)\\b"
+        }
+      ]
+    },
+
+    "constants": {
+      "patterns": [
+        {
+          "name": "variable.other.constant.pyrois",
+          "match": "\\b[A-Z][A-Z0-9_]{2,}\\b"
+        },
+        {
+          "name": "constant.language.pyrois",
+          "match": "\\b(TRUE|FALSE|NULL)\\b"
+        }
+      ]
+    },
+
+    "function-call": {
+      "patterns": [
+        {
+          "name": "entity.name.function.call.pyrois",
+          "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\()"
+        }
+      ]
+    },
+
+    "member-access": {
+      "patterns": [
+        {
+          "name": "entity.name.function.member.pyrois",
+          "match": "(?<=\\.)[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\()"
+        },
+        {
+          "name": "variable.other.property.pyrois",
+          "match": "(?<=\\.)[A-Za-z_][A-Za-z0-9_]*"
+        }
+      ]
+    },
+
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "variable.other.readwrite.pyrois",
+          "match": "[A-Za-z_][A-Za-z0-9_]*"
+        }
+      ]
+    },
+
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.pyrois",
+          "match": "\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?"
+        },
+        {
+          "name": "constant.numeric.float.pyrois",
+          "match": "(?<![A-Za-z0-9_])\\.\\d+([eE][+-]?\\d+)?"
+        }
+      ]
+    },
+
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.pyrois",
+          "match": "[-+*/%^&|!<>=?:]"
+        }
+      ]
+    },
+
+    "punctuation": {
+      "patterns": [
+        { "name": "punctuation.terminator.statement.pyrois", "match": ";" },
+        { "name": "punctuation.separator.comma.pyrois", "match": "," },
+        { "name": "punctuation.accessor.pyrois", "match": "\\." },
+        { "name": "punctuation.section.parens.pyrois", "match": "[()]" },
+        { "name": "punctuation.section.brackets.pyrois", "match": "[\\[\\]]" },
+        { "name": "punctuation.section.braces.pyrois", "match": "[{}]" }
+      ]
+    }
+  }
+}

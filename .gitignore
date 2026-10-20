@@ -1,0 +1,11 @@
+# 依赖
+node_modules/
+
+# 打包产物
+*.vsix
+
+# 本地草稿
+*.code-workspace
+
+# 本地临时文件
+notes/
