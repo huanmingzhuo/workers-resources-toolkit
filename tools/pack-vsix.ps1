@@ -256,7 +256,8 @@ $contentTypes = @'
   <Default Extension="md" ContentType="text/markdown" />
   <Default Extension="txt" ContentType="text/plain" />
   <Default Extension="png" ContentType="image/png" />
-  <Default Extension="LICENSE" ContentType="text/plain" />
+  <!-- LICENSE 没有扩展名，Default 按「.后缀」匹配不到它，必须用 Override 指名 -->
+  <Override PartName="/extension/LICENSE" ContentType="text/plain" />
 </Types>
 '@
 
