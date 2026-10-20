@@ -215,6 +215,20 @@ foreach ($f in (Get-ChildItem -LiteralPath $root -Recurse -File -Force)) {
 if ($files.Count -eq 0) { throw '没有收集到任何文件，检查一下目录结构。' }
 
 # ---------------------------------------------------------------- 清单
+# package.json 里的 repository / homepage / bugs 不会自动进 manifest，
+# 市场页面右侧那几个链接读的就是 Links.Source / Learn / Support，缺了就不显示。
+$linkProps = ''
+$esc = { param($s) if ($s) { [System.Security.SecurityElement]::Escape([string]$s) } else { '' } }
+if ($pkg.repository -and $pkg.repository.url) {
+    $linkProps += "      <Property Id=`"Microsoft.VisualStudio.Services.Links.Source`" Value=`"$(& $esc $pkg.repository.url)`" />`n"
+}
+if ($pkg.homepage) {
+    $linkProps += "      <Property Id=`"Microsoft.VisualStudio.Services.Links.Learn`" Value=`"$(& $esc $pkg.homepage)`" />`n"
+}
+if ($pkg.bugs -and $pkg.bugs.url) {
+    $linkProps += "      <Property Id=`"Microsoft.VisualStudio.Services.Links.Support`" Value=`"$(& $esc $pkg.bugs.url)`" />`n"
+}
+
 $manifest = @"
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
@@ -228,7 +242,7 @@ $manifest = @"
     <Properties>
       <Property Id="Microsoft.VisualStudio.Code.Engine" Value="$($pkg.engines.vscode)" />
       <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace,web" />
-    </Properties>
+${linkProps}    </Properties>
     <License>extension/LICENSE</License>
     <Icon>extension/images/icon.png</Icon>
   </Metadata>
