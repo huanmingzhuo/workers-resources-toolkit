@@ -2,7 +2,7 @@
   "name": "wrsr-toolkit",
   "displayName": "%displayName%",
   "description": "%description%",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "huanmingzhuo",
   "author": "huanmingzhuo",
   "license": "MIT",
